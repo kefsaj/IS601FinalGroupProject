@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <link rel="stylesheet" href="stylesheet.css">
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+          integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
+    <title>IS601 Final Project</title>
+</head>
+<style>
+        /* Coded with love by Mutiullah Samim */
+        body#LoginForm {
+            background-image: url("https://hdwallsource.com/img/2014/9/blur-26347-27038-hd-wallpapers.jpg");
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: cover;
+            padding: 10px;
+        }
+
+        .form-heading {
+            color: #fff;
+            font-size: 23px;
+        }
+
+        .panel h2 {
+            color: #444444;
+            font-size: 18px;
+            margin: 0 0 8px 0;
+        }
+
+        .panel p {
+            color: #777777;
+            font-size: 14px;
+            margin-bottom: 30px;
+            line-height: 24px;
+        }
+
+        .login-form .form-control {
+            background: #f7f7f7 none repeat scroll 0 0;
+            border: 1px solid #d4d4d4;
+            border-radius: 4px;
+            font-size: 14px;
+            height: 50px;
+            line-height: 50px;
+        }
+
+        .main-div {
+            background: #ffffff none repeat scroll 0 0;
+            border-radius: 2px;
+            margin: 10px auto 30px;
+            max-width: 38%;
+            padding: 50px 70px 70px 71px;
+        }
+
+        .login-form .form-group {
+            margin-bottom: 10px;
+        }
+
+        .login-form {
+            text-align: center;
+        }
+
+        .forgot a {
+            color: #777777;
+            font-size: 14px;
+            text-decoration: underline;
+        }
+
+        .login-form .btn.btn-primary {
+            background: #f0ad4e none repeat scroll 0 0;
+            border-color: #f0ad4e;
+            color: #ffffff;
+            font-size: 14px;
+            width: 100%;
+            height: 50px;
+            line-height: 50px;
+            padding: 0;
+        }
+
+        .forgot {
+            text-align: left;
+            margin-bottom: 30px;
+        }
+
+        .botto-text {
+            color: #ffffff;
+            font-size: 14px;
+            margin: auto;
+        }
+
+        .login-form .btn.btn-primary.reset {
+            background: #ff9900 none repeat scroll 0 0;
+        }
+
+        .back {
+            text-align: left;
+            margin-top: 10px;
+        }
+        .back a {
+            color: #444444;
+            font-size: 13px;
+            text-decoration: none;
+        }
+    </style>
+<body id="LoginForm">
+<nav class="navbar navbar-expand-lg navbar-light">
+    <a class="navbar-brand">IS601 Final Project</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+        </ul>
+        <div class="form-inline my-2 my-lg-0">
+            <a href="/logout" class="card-link btn btn-primary">Logout</a>
+        </div>
+    </div>
+</nav>
+
+<div class="container">
+    {% if activate %}
+    <h1>Enter your information</h1>
+    <p>Firstname: {{firstname}}</p>
+    <p>Lastname: {{lastname}}</p>
+    <p>username: {{username}}</p>
+    <p>email: {{email}}</p>
+    {% else %}
+
+    <h1>User is not activated, please check your email to activate the account</h1>
+
+    {% endif %}
+<div class="container">
+    <footer class="pt-4 my-md-5 pt-md-5 border-top">
+        <div class="row">
+
+            <div class="col-6 col-md">
+                <h5>Kefin Sajan</h5>
+                <ul class="list-unstyled text-small">
+                    <li><a class="text-muted" href="#">Email: ks664@njit.edu</a></li>
+                    <li><a class="text-muted" href="https://www.linkedin.com/in/kefsaj/">Linked in</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-6 col-md">
+            </div>
+        </div>
+    </footer>
+</div>
+</div>
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+        integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+        integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
+        crossorigin="anonymous"></script>
+</body>
+</html>
