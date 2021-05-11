@@ -12,7 +12,13 @@ from flask import Flask, render_template, request, redirect, url_for, session
 from flask import render_template
 from flaskext.mysql import MySQL
 from pymysql.cursors import DictCursor
+import smtplib, ssl
+from email.mime.text import MIMEText
+from email.mime.multipart import MIMEMultipart
+import hashlib
 
+app = Flask(__name__)
+mysql = MySQL(cursorclass=DictCursor)
 app = Flask(__name__)
 mysql = MySQL(cursorclass=DictCursor)
 
@@ -27,7 +33,8 @@ mysql.init_app(app)
 def index():
     return render_template('homepage.html')
 
-@app.route('/login', methods=[ 'POST'])
+
+@app.route('/login', methods=['GET', 'POST'])
 def login():
     message = ''
     if request.method == 'POST' and 'username' in request.form and 'password' in request.form:
@@ -39,7 +46,11 @@ def login():
         # Fetch one record and return result
         account = cursor.fetchall()
         if account:
+            # Create session data, we can access this data in other routes
+            # session['id'] = account['id']
+            # session['username'] = account['username']
             message = 'Logged in successfully!'
+            # print(account['id'])
             user = account[0]
             user_id = int(user['id'])
             return redirect('/profile/{}'.format(user_id))
