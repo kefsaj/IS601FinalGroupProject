@@ -21,7 +21,6 @@
 <style>
         /* Coded with love by Mutiullah Samim */
         body#LoginForm {
-            background-image: url("https://hdwallsource.com/img/2014/9/blur-26347-27038-hd-wallpapers.jpg");
             background-repeat: no-repeat;
             background-position: center;
             background-size: cover;
@@ -115,7 +114,7 @@
     </style>
 <body id="LoginForm">
 <nav class="navbar navbar-expand-lg navbar-light">
-    <a class="navbar-brand">IS601 Final Project</a>
+    <a class="navbar-brand">The School Hub</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -132,33 +131,40 @@
 
 <div class="container">
     {% if activate %}
-    <h1>Enter your information</h1>
+    <h1>Your's information</h1>
     <p>Firstname: {{firstname}}</p>
     <p>Lastname: {{lastname}}</p>
-    <p>username: {{username}}</p>
-    <p>email: {{email}}</p>
+
     {% else %}
 
-    <h1>User is not activated, please check your email to activate the account</h1>
+    <h1>Your account is not activated, please check your email to activate the account</h1>
 
     {% endif %}
-<div class="container">
-    <footer class="pt-4 my-md-5 pt-md-5 border-top">
-        <div class="row">
 
-            <div class="col-6 col-md">
-                <h5>Kefin Sajan</h5>
-                <ul class="list-unstyled text-small">
-                    <li><a class="text-muted" href="#">Email: ks664@njit.edu</a></li>
-                    <li><a class="text-muted" href="https://www.linkedin.com/in/kefsaj/">Linked in</a>
-                    </li>
-                </ul>
+        <footer class="pt-4 my-md-5 pt-md-5 border-top">
+            <div class="row">
+                <div class="col-12 col-md">
+                </div>
+                <div class="col-6 col-md">
+                    <h5>Kefin Sajan</h5>
+                    <ul class="list-unstyled text-small">
+                        <li><a class="text-muted" href="#">Email: ks664@njit.edu</a></li>
+                        <li><a class="text-muted" href="https://www.linkedin.com/in/kefsaj/">LinkedIn</a></li>
+                    </ul>
+                </div>
+                <div class="col-6 col-md">
+                    <h5>Adrianna Brzezinska</h5>
+                    <ul class="list-unstyled text-small">
+                        <li><a class="text-muted" href="#">Email: ab344@njit.edu</a></li>
+                        <li><a class="text-muted" href="https://www.linkedin.com/in/adrianna-b-2b5350155/">LinkedIn</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-6 col-md">
+                </div>
             </div>
-            <div class="col-6 col-md">
-            </div>
-        </div>
-    </footer>
-</div>
+        </footer>
+
 </div>
 
 <!-- Optional JavaScript -->
