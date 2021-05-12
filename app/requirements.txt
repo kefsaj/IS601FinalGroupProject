@@ -1,3 +1,15 @@
 Flask
 flask-mysql
 simplejson
+blinker
+certifi
+click
+Flask-Mail
+Flask-MySQL
+gunicorn
+itsdangerous
+Jinja2
+MarkupSafe
+PyMySQL
+simplejson
+Werkzeug
