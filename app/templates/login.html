@@ -1,12 +1,13 @@
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
 
 <!DOCTYPE html>
 <html>
 
 <head>
-    <title>IS601 Final Project</title>
+    <title>IS601 Final- Log in</title>
     <link rel="stylesheet" href="stylesheet.css">
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
@@ -20,7 +21,7 @@
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <style>
-
+        /* Coded with love by Mutiullah Samim */
         body#LoginForm {
             background-repeat: no-repeat;
             background-position: center;
@@ -115,15 +116,16 @@
         }
     </style>
 </head>
+<!--Coded with love by Mutiullah Samim-->
 <body id="LoginForm">
 
 <div class="container">
-    <h1 class="form-heading">IS601 Login Form</h1>
+    <h1 class="form-heading">IS601 Final Project</h1>
     <div class="login-form">
         <div class="main-div">
             <div class="panel">
                 <h2>Login</h2>
-                <p> Enter your email and password</p>
+                <p>Please enter your email and password</p>
             </div>
             <form action="{{ url_for('login') }}" method="post" id="Login">
                 <div class="form-group">
@@ -138,7 +140,9 @@
                 <input type="submit" value="Login" class="btn btn-primary">
             </form>
             <div class="mt-4">
-
+                <div class="d-flex justify-content-center links">
+                    Need an account? <a href="/register" class="ml-2">Sign Up</a>
+                </div>
             </div>
         </div>
     </div>
@@ -147,11 +151,20 @@
 <div class="container">
     <footer class="pt-4 my-md-5 pt-md-5 border-top">
         <div class="row">
+            <div class="col-12 col-md">
+            </div>
             <div class="col-6 col-md">
                 <h5>Kefin Sajan</h5>
                 <ul class="list-unstyled text-small">
                     <li><a class="text-muted" href="#">Email: ks664@njit.edu</a></li>
-                    <li><a class="text-muted" href="https://www.linkedin.com/in/kefsaj/">Linked in</a>
+                    <li><a class="text-muted" href="https://www.linkedin.com/in/kefsaj/">LinkedIn</a></li>
+                </ul>
+            </div>
+            <div class="col-6 col-md">
+                <h5>Adrianna Brzezinska</h5>
+                <ul class="list-unstyled text-small">
+                    <li><a class="text-muted" href="#">Email: ab344@njit.edu</a></li>
+                    <li><a class="text-muted" href="https://www.linkedin.com/in/adrianna-b-2b5350155/">LinkedIn</a>
                     </li>
                 </ul>
             </div>
@@ -160,7 +173,6 @@
         </div>
     </footer>
 </div>
-
 
 </body>
 </html>
