@@ -8,6 +8,8 @@ Possible Project features (Each team member implement 1)
 
 2.  Create a login and registration process that includes email verification.  You can use a service like SendGrid to send email and you should look for a Flask Plugin to help.
 
+Team Members: Kefin Sajan and Adrianna Brzezinska
+
 Submission Instructions
 
 Submit a link to GitHub with the overall concept for your project and a list of your team members names on the Readme file and a description of the feature that each person completed.  Upload a word document showing the feature working step by step.  Each group member must submit a link to the repo and the word file describing their feature and showing it working.  The GitHub Repository should have a Readme with installation instructions for using the app with Docker, so it can be easily downloaded and run.  If the project can't be downloaded and run with a simple docker-compose up command then it will be rejected and you will automatically receive only 50 points for the project.   You must test your project so that it works and the installation instructions are correct.
