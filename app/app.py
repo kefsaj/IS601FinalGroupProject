@@ -1,11 +1,3 @@
-"""
-id
-username
-password
-email
-isemailed
-"""
-
 from typing import List, Dict
 import simplejson as json
 from flask import Flask, render_template, request, redirect, url_for, session
@@ -19,15 +11,21 @@ import hashlib
 
 app = Flask(__name__)
 mysql = MySQL(cursorclass=DictCursor)
-app = Flask(__name__)
-mysql = MySQL(cursorclass=DictCursor)
 
-app.config['MYSQL_DATABASE_HOST'] = 'db'
-app.config['MYSQL_DATABASE_USER'] = 'root'
-app.config['MYSQL_DATABASE_PASSWORD'] = 'root'
+# app.config['MYSQL_DATABASE_HOST'] = 'db'
+# app.config['MYSQL_DATABASE_USER'] = 'root'
+# app.config['MYSQL_DATABASE_PASSWORD'] = 'root'
+# app.config['MYSQL_DATABASE_PORT'] = 3306
+# app.config['MYSQL_DATABASE_DB'] = 'userData'
+
+app.config['MYSQL_DATABASE_HOST'] = 'us-cdbr-east-02.cleardb.com'
+app.config['MYSQL_DATABASE_USER'] = 'b90ece5bbd6812'
+app.config['MYSQL_DATABASE_PASSWORD'] = 'f5dbc703'
 app.config['MYSQL_DATABASE_PORT'] = 3306
-app.config['MYSQL_DATABASE_DB'] = 'userData'
+app.config['MYSQL_DATABASE_DB'] = 'heroku_d57e0c92f5d3a70'
 mysql.init_app(app)
+
+# message = ''
 
 @app.route('/', methods=['GET'])
 def index():
@@ -46,14 +44,19 @@ def login():
         # Fetch one record and return result
         account = cursor.fetchall()
         if account:
+            # Create session data, we can access this data in other routes
+            # session['id'] = account['id']
+            # session['username'] = account['username']
             message = 'Logged in successfully!'
+            # print(account['id'])
             user = account[0]
             user_id = int(user['id'])
             return redirect('/profile/{}'.format(user_id))
         else:
             # Account doesnt exist or username/password incorrect
-            message = 'Your username/password is incorrect!'
+            message = 'Incorrect username/password!'
     return render_template('login.html', msg=message)
+
 
 @app.route('/profile/<int:user_id>', methods=['GET'])
 def profile(user_id):
@@ -62,20 +65,21 @@ def profile(user_id):
     # Fetch one record and return result
     account = cursor.fetchone()
     return render_template('profile.html', firstname=account['firstname'], lastname=account['lastname'],
-                           isemailed=isemailed['isemailed'], id=account['id'])
-"""
-id
-username
-password
-email
-isemailed
-"""
+                           activate=account['isactivate'], id=account['id'])
+
+
+@app.route('/logout', methods=['GET'])
+def logout():
+    # session.pop('username', None)
+    # session.pop('id', None)
+    return redirect('/', code=302)
 
 
 @app.route('/register', methods=['GET'])
 def register_get():
     message = ''
     return render_template('register.html', msg=message)
+
 
 @app.route('/register', methods=['POST'])
 def register_post():
@@ -93,9 +97,8 @@ def register_post():
     inputData = (request.form.get('username'),
                  hashlib.md5(request.form['password'].encode(encoding='UTF-8', errors='strict')).hexdigest(),
                  request.form.get('firstname'),
-                 request.form.get('lastname'), request.form.get('school'),
-                 request.form.get('department'), request.form.get('year'), False)
-    sql_insert_query = """INSERT INTO userTable (username,password,firstname,lastname,isemailed) VALUES (%s, %s,%s, %s,%s, %s,%s,%s) """
+                 request.form.get('lastname'),  False)
+    sql_insert_query = """INSERT INTO userTable (username,password,firstname,lastname,isactivate) VALUES (%s,%s,%s, %s,%s) """
     cursor.execute(sql_insert_query, inputData)
 
     mysql.get_db().commit()
@@ -108,20 +111,20 @@ def register_post():
     user_id = int(user['id'])
 
     smtp_server = "smtp.gmail.com"
-    port = 587
+    port = 587  # For starttls
     sender_email = "is601final@gmail.com"
     receiver_email = request.form.get('username')
-    mail_password = 'KefinSajan' # mail_password = 'xudryc-waNfy9-zopfyv'
-    main_url = 'https://is601.herokuapp.com/activate/{}'.format(user_id)
+    mail_password = 'KefinSajan'
+    #main_url = 'https://schoolhub2020.herokuapp.com/activate/{}'.format(user_id)
 
     message = MIMEMultipart("alternative")
-    message["Subject"] = "Activating Your Account regarding IS601 Final Project"
+    message["Subject"] = "Activating Account for IS601 Final Project"
     message["From"] = sender_email
     message["To"] = receiver_email
     content = """\
-    Subject: Activating Your Account regarding IS601 Final Project
+    Subject: Activate Account to IS601 Final Project
 
-    Please click this link to activate: """ + main_url
+    Please click this link to activate: """ #+ main_url
     part1 = MIMEText(content, "plain")
     message.attach(part1)
     context = ssl.create_default_context()
@@ -133,34 +136,28 @@ def register_post():
         server.ehlo()  # Can be omitted
         server.login(sender_email, mail_password)
         server.sendmail(sender_email, receiver_email, message.as_string())
-        message = 'The Verification by email has been sent!'
-
     except Exception as e:
         # Print any error messages to stdout
         print(e)
     finally:
         server.quit()
-    return redirect('/profile/{}'.format(user_id), msg=message)
+    return redirect('/profile/{}'.format(user_id))
 
-@app.route('/<int:user_id>', methods=['POST'])
+
+@app.route('/activate/<int:user_id>', methods=['GET'])
 def activate(user_id):
     cursor = mysql.get_db().cursor()
     cursor.execute('SELECT * FROM userTable WHERE id = %s', (user_id))
     result = cursor.fetchall()
     user = result[0]
-    inputData = (user['username'], user['password'], user['email'],
-                 user['isemailed'], True, user_id)
-    sql_update_query = """UPDATE userTable t SET t.username = %s, t.password = %s, t.email = %s, t.isemailed = %s,  WHERE t.id = %s """
+    inputData = (user['username'], user['password'], user['firstname'],
+                 user['lastname'], True, user_id)
+    sql_update_query = """UPDATE userTable t SET t.username = %s, t.password = %s, t.firstname = %s, t.lastname = 
+        %s, t.isactivate=%s WHERE t.id = %s """
     cursor.execute(sql_update_query, inputData)
     mysql.get_db().commit()
-    return render_template('success.html')
-"""
-id
-username
-password
-email
-isemailed
-"""
+    return redirect('/profile/{}'.format(user_id))
+
 
 if __name__ == '__main__':
     app.secret_key = 'super secret key'
