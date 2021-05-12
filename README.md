@@ -39,3 +39,7 @@
 
 - Result of signing in
 ![image](https://github.com/kefsaj/IS601FinalGroupProject/blob/LoginRegisteration/screenshots/Signed%20in.PNG)
+
+- Table Data
+![image](https://raw.githubusercontent.com/kefsaj/IS601FinalGroupProject/LoginRegisteration/screenshots/Table%20data.PNG)
+
