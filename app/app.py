@@ -46,27 +46,101 @@ def login():
         # Fetch one record and return result
         account = cursor.fetchall()
         if account:
-            # Create session data, we can access this data in other routes
-            # session['id'] = account['id']
-            # session['username'] = account['username']
             message = 'Logged in successfully!'
-            # print(account['id'])
             user = account[0]
             user_id = int(user['id'])
             return redirect('/profile/{}'.format(user_id))
         else:
             # Account doesnt exist or username/password incorrect
-            message = 'Incorrect username/password!'
+            message = 'Your username/password is incorrect!'
     return render_template('login.html', msg=message)
 
-@app.route('/logout', methods=['GET'])
-def logout():
-    return render_template('login.html')
+@app.route('/profile/<int:user_id>', methods=['GET'])
+def profile(user_id):
+    cursor = mysql.get_db().cursor()
+    cursor.execute('SELECT * FROM userTable WHERE id = %s', (user_id))
+    # Fetch one record and return result
+    account = cursor.fetchone()
+    return render_template('profile.html', firstname=account['firstname'], lastname=account['lastname'],
+                           isemailed=isemailed['isemailed'], id=account['id'])
+"""
+id
+username
+password
+email
+isemailed
+"""
+
+
+@app.route('/register', methods=['GET'])
+def register_get():
+    message = ''
+    return render_template('register.html', msg=message)
 
 @app.route('/register', methods=['POST'])
-def register():
+def register_post():
+    message = ''
+    cursor = mysql.get_db().cursor()
+    username = request.form['username']
+    cursor.execute('SELECT * FROM userTable WHERE username = %s', (username))
+    account = cursor.fetchone()
+    if account:
+        message = 'username already exist'
+        return render_template('register.html', msg=message)
+    if request.form['password'] != request.form['confirm_password']:
+        message = 'password is not match'
+        return render_template('register.html', msg=message)
+    inputData = (request.form.get('username'),
+                 hashlib.md5(request.form['password'].encode(encoding='UTF-8', errors='strict')).hexdigest(),
+                 request.form.get('firstname'),
+                 request.form.get('lastname'), request.form.get('school'),
+                 request.form.get('department'), request.form.get('year'), False)
+    sql_insert_query = """INSERT INTO userTable (username,password,firstname,lastname,isemailed) VALUES (%s, %s,%s, %s,%s, %s,%s,%s) """
+    cursor.execute(sql_insert_query, inputData)
 
-    return render_template('success.html', msg=message)
+    mysql.get_db().commit()
+    username = request.form['username']
+    password = hashlib.md5(request.form['password'].encode(encoding='UTF-8', errors='strict')).hexdigest()
+    cursor = mysql.get_db().cursor()
+    cursor.execute('SELECT * FROM userTable WHERE username = %s AND password = %s', (username, password,))
+    account = cursor.fetchall()
+    user = account[0]
+    user_id = int(user['id'])
+
+    smtp_server = "smtp.gmail.com"
+    port = 587
+    sender_email = "is601final@gmail.com"
+    receiver_email = request.form.get('username')
+    mail_password = 'KefinSajan' # mail_password = 'xudryc-waNfy9-zopfyv'
+    main_url = 'https://is601.herokuapp.com/activate/{}'.format(user_id)
+
+    message = MIMEMultipart("alternative")
+    message["Subject"] = "Activating Your Account regarding IS601 Final Project"
+    message["From"] = sender_email
+    message["To"] = receiver_email
+    content = """\
+    Subject: Activating Your Account regarding IS601 Final Project
+
+    Please click this link to activate: """ + main_url
+    part1 = MIMEText(content, "plain")
+    message.attach(part1)
+    context = ssl.create_default_context()
+    # Try to log in to server and send email
+    try:
+        server = smtplib.SMTP(smtp_server, port)
+        server.ehlo()  # Can be omitted
+        server.starttls(context=context)  # Secure the connection
+        server.ehlo()  # Can be omitted
+        server.login(sender_email, mail_password)
+        server.sendmail(sender_email, receiver_email, message.as_string())
+        message = 'The Verification by email has been sent!'
+
+    except Exception as e:
+        # Print any error messages to stdout
+        print(e)
+    finally:
+        server.quit()
+    return redirect('/profile/{}'.format(user_id), msg=message)
 
 @app.route('/<int:user_id>', methods=['POST'])
 def activate(user_id):
