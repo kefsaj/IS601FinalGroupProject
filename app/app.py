@@ -115,7 +115,6 @@ def register_post():
     sender_email = "is601final@gmail.com"
     receiver_email = request.form.get('username')
     mail_password = 'KefinSajan'
-    #main_url = 'https://schoolhub2020.herokuapp.com/activate/{}'.format(user_id)
 
     message = MIMEMultipart("alternative")
     message["Subject"] = "Activating Account for IS601 Final Project"
@@ -124,7 +123,7 @@ def register_post():
     content = """\
     Subject: Activate Account to IS601 Final Project
 
-    Please click this link to activate: """ #+ main_url
+    Please click this link to activate: """
     part1 = MIMEText(content, "plain")
     message.attach(part1)
     context = ssl.create_default_context()
