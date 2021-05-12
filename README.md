@@ -1,15 +1,41 @@
-# IS601FinalGroupProject
+# IS601 Final Group Project
 
-For this project, you need to research and develop one unique feature per team member and integrate it into the application that you have been making in the previous homework web application project.  I am not providing any resources for this team project other than the list of 3 possible options for your project.  The objective of this is for you to work with your team to plan, develop, and integrate your features together in a final project.  Each persons work should be easily visible on the site and the site should be organized thoughtfully and cohesively i.e. not just random stuff thrown together.  Come up with a concept for your application that uses these three features, or you can propose a different feature to the professor for approval.  Generally I will approve anything that is of similar difficulty to the options below
+### Team Members: Kefin Sajan and Adrianna Brzezinska
 
-Possible Project features (Each team member implement 1)
+### To Run This Project:
+1.	Clone the repository with Git command. The command is: 
+ ```git clone https://github.com/kefsaj/IS601FinalGroupProject.git```
+2.	Run the Docker compose file with the command inside the IS601FinalGroupProject folder:
+ ```docker-compose up```
 
-1.  Use the statistics project to create API endpoints and then consume those endpoints using a JavaScript chart selected from the ones listed in this article here (Links to an external site.).
+### Implement by Kefin Sajan
+* Click here to find out [more](https://github.com/kefsaj/IS601FinalGroupProject/tree/LoginRegisteration).
+* Create a login and registration process that includes email verification.  You can use a service like SendGrid to send email and you should look for a Flask Plugin to help.
 
-2.  Create a login and registration process that includes email verification.  You can use a service like SendGrid to send email and you should look for a Flask Plugin to help.
+### Implement by Adrianna Brzezinska
+* Click here to find out [more](https://github.com/ab344/IS601FinalGroupProject/tree/API2).
+* Use the statistics project to create API endpoints and then consume those endpoints using a JavaScript chart selected from the ones listed in this article [here](https://blog.logrocket.com/top-picks-javascript-chart-libraries/).
 
-Team Members: Kefin Sajan and Adrianna Brzezinska
 
-Submission Instructions
+### More screenshots are included in the Screenshots [folder](https://github.com/kefsaj/IS601FinalGroupProject/tree/LoginRegisteration/screenshots). 
 
-Submit a link to GitHub with the overall concept for your project and a list of your team members names on the Readme file and a description of the feature that each person completed.  Upload a word document showing the feature working step by step.  Each group member must submit a link to the repo and the word file describing their feature and showing it working.  The GitHub Repository should have a Readme with installation instructions for using the app with Docker, so it can be easily downloaded and run.  If the project can't be downloaded and run with a simple docker-compose up command then it will be rejected and you will automatically receive only 50 points for the project.   You must test your project so that it works and the installation instructions are correct.
+- Home Page
+![image](https://github.com/kefsaj/IS601FinalGroupProject/blob/LoginRegisteration/screenshots/Main%20Page.PNG)
+
+- Login Page
+![image](https://github.com/kefsaj/IS601FinalGroupProject/blob/LoginRegisteration/screenshots/Login%20Page.PNG)
+
+- Reg. Page
+![image](https://github.com/kefsaj/IS601FinalGroupProject/blob/LoginRegisteration/screenshots/new%20user%20reg%20page.PNG)
+
+- Notification from email
+![image](https://github.com/kefsaj/IS601FinalGroupProject/blob/LoginRegisteration/screenshots/The%20email%20notification.PNG)
+
+- Actual email sent
+![image](https://github.com/kefsaj/IS601FinalGroupProject/blob/LoginRegisteration/screenshots/Recieved%20email.PNG)
+
+- Back at the login Page with browser auto saved username and password
+![image](https://github.com/kefsaj/IS601FinalGroupProject/blob/LoginRegisteration/screenshots/Next%20sign%20in.PNG)
+
+- Result of signing in
+![image](https://github.com/kefsaj/IS601FinalGroupProject/blob/LoginRegisteration/screenshots/Signed%20in.PNG)
